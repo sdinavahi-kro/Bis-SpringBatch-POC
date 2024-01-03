@@ -1,0 +1,37 @@
+application:
+  name: SpringBatchPOC
+
+server:
+  port: 8081
+  servlet:
+    contextPath: /
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+            maximumPoolSize: 20
+            connectionTimeout: 400000
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
+    hibernate:
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+               
+    properties:
+        hibernate:
+            enable_lazy_load_no_trans: true
+            format_sql: false
+            generate_statistics: false
+            order_updates: true
+            order_inserts: true
+
+  batch:
+    jdbc:
+      initialize-schema: embedded
